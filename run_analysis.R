@@ -11,7 +11,7 @@
 activity_labels <- read.table("~/GettingandCleaningData/UCI HAR Dataset/activity_labels.txt", quote="\"")
 activity_labels$V2 <- as.character(activity_labels$V2)
 names(activity_labels)[1] <- "CLASS LABEL"
-names(activity_labels)[2] <- "ACTIVITY NAME"
+names(activity_labels)[2] <- "ACTIVITYNAME"
 #
 features <- read.table("~/GettingandCleaningData/UCI HAR Dataset/features.txt", quote="\"")
 features$V2 <- as.character(features$V2)
@@ -42,10 +42,22 @@ test_dataset <- cbind(subject_test, y_test, X_test)
 train_dataset <- cbind(subject_train, y_train, X_train)
 HAR_dataset <- rbind(test_dataset, train_dataset)
 #
-HAR_dataset <- merge(activity_labels,HAR_dataset)
+# 2 - Extracts only the measurements on the mean and standard deviation for each measurement.
+# 
+mean_sd_features <- grep("(mean|std)", features[, 2],ignore.case=T)
 #
-# 2 - 
-# 3 -
+for (i in 1:86){
+        mean_sd_var[i] <- features[,2][mean_sd_features[i]]
+}
+HAR_mean_sd_dataset <- cbind(HAR_dataset[,1:3],HAR_dataset[mean_sd_var])
+#
+# 3 - Uses descriptive activity names to name the activities in the data set
+#
+HAR_mean_sd_dataset <- merge(activity_labels,HAR_mean_sd_dataset)
+#
 # 4 -
 #
-# 5 - 
+# 5 - creates a second, independent tidy data set with the average of each variable for each activity and each subject
+# a parità di soggetto e attività bisogna fare la media delle variabili
+
+tapply(HAR_mean_sd_dataset$SUBJECT, HAR_mean_sd_dataset$ACTIVITYNAME, mean)
