@@ -62,7 +62,7 @@ describes each variable and its units.
 **Legend:**
 
 * time            --> signal in time domain
-* frequency       --> signal in frequencity domani
+* frequency       --> signal in frequencity domain
 * acc             --> signal from accelerometer 
 * gyro            --> signal from gyroscope
 * std             --> standard deviation
