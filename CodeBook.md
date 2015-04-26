@@ -1,4 +1,4 @@
-# Code Book for *runanalisys* dataset
+# Code Book for the *runanalisys* dataset
 
 This is the CodeBook for the **runanalisys** tiny dataset creared with the *run_analysis.R* script
 

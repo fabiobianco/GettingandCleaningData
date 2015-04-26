@@ -1,4 +1,4 @@
-## Getting and Cleaning Data Project Assignement
+## Getting and Cleaning Data - Project Assignement
 
 This is the result of Project assignement on Getting and Cleaning Data course. Below you can read information about:  
 
