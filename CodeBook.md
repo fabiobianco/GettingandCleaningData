@@ -2,13 +2,59 @@
 
 This is the CodeBook for the **runanalisys** tiny dataset creared with the *run_analysis.R* script
 
-
-#Study design
+# Information about the experimental study design that generated the raw data 
 The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
 
-#Code book 
+# Information about choice made on data manipolation
+The *run_analysis.R* script performs the following steps to clean the data:  
+
+1. Read activity_labels.txt file from the working directory and store in *activity_labels*
+2. Read features.txt file from the working directory and store in *features*
+3. Read X_train.txt, y_train.txt and subject_train.txt from the working directory, merge and store in *train_dataset*
+4. Read X_test.txt, y_test.txt and subject_test.txt from the working directory, merge and store in *test_dataset*
+5. Merges the training and the test sets to create one data set named *HAR_dataset*
+```
+HAR_dataset <- rbind(test_dataset, train_dataset)
+```
+6. Extracts only the measurements on the mean and standard deviation for each measurement in the dataset  
+```
+mean_sd_features <- grep("(mean|std)", features[, 2],ignore.case=T)
+```
+7. Uses descriptive activity names to name the activities in the data set
+```
+HAR_dataset1 <- merge(activity_labels,HAR_mean_sd_dataset)
+```
+8. labels the data set with descriptive variable names
+```
+#
+new_labels <- gsub("-", ".", names(HAR_dataset2))
+# insert "time" for t variables
+new_labels <- gsub("\\bt", "time", new_labels)
+# insert "frequency" for f variables
+new_labels <- gsub("\\bf", "frequency", new_labels)
+# remove parenthesis from names
+new_labels <- sub("\\(\\)","", new_labels)
+#
+```
+9. creates a second, independent tidy dataset with the average of each variable for each activity and each subject
+```
+HAR_list <- split(HAR_dataset4, HAR_dataset4$subject)
+#
+HAR_dataset5 <- data.frame()
+for (i in 1:30){
+        dataset_temp <- as.data.table(HAR_list[[i]])
+        dataset_temp <- dataset_temp[, lapply(.SD, mean), by = activityname]
+        HAR_dataset5 <- rbind(HAR_dataset5,dataset_temp)
+        rm(dataset_temp)
+}
+```
+10. create the runanalisys.txt dataset file
+```
+write.table(HAR_dataset5 , "runanalisys.txt", sep="\t")
+```
+# Information about the variables in the data set
 describes each variable and its units.
 
 1. *subject* - volunteers identifier, possible value from 1 to 30        

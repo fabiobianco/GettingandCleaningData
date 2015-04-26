@@ -27,6 +27,6 @@ All logical steps was made by the *run_analisis.R* script, available on this rep
 
 The file CodeBook.md in this repository contain:
 
-1. Information about the variables in the data set 
+1. Information about the experimental study design that generated the raw data 
 2. Information about choice made on data manipolation 
-3. Information about the experimental study design that generated the raw data
+3. Information about the variables in the data set  
