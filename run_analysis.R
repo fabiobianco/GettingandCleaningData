@@ -30,7 +30,7 @@ names(features)[2] <- "varname"
 #
 subject_train <- read.table("~/GettingandCleaningData/subject_train.txt", quote="\"")
 X_train <- read.table("~/GettingandCleaningData/X_train.txt", quote="\"")
-y_train <- read.table("~/GettingandCleaningData/train/y_train.txt", quote="\"")
+y_train <- read.table("~/GettingandCleaningData/y_train.txt", quote="\"")
 # Assign names to columns
 names(subject_train) <- "subject"
 names(y_train) <- "classlabel"
@@ -65,6 +65,7 @@ mean_sd_var <- c(1:86)
 for (i in 1:86){
         mean_sd_var[i] <- features[,2][mean_sd_features[i]]
 }
+#
 HAR_mean_sd_dataset <- cbind(HAR_dataset[,1:3],HAR_dataset[mean_sd_var])
 #
 ##############################################################################
@@ -76,7 +77,7 @@ HAR_dataset1 <- HAR_dataset1[with(HAR_dataset1, order(subject, classlabel)), ]
 #
 # Delete the "classlabel" column because have the same sense of "activityname" column, and rearrange the columns
 #
-HAR_dataset1 <- cbind(HAR_dataset1[,3],HAR_dataset1[,2],HAR_dataset1[,4:90])
+HAR_dataset1 <- cbind(HAR_dataset1[,3],HAR_dataset1[,2],HAR_dataset1[,5:90])
 names(HAR_dataset1)[1] <- "subject"
 names(HAR_dataset1)[2] <- "activityname"
 #
@@ -87,6 +88,7 @@ HAR_dataset2 <- HAR_dataset1
 ###########################################################
 #
 # just made before when I cread the training and test data set!
+
 #
 #######################################################################################################################
 # 5 - creates a second, independent tidy dataset with the average of each variable for each activity and each subject #
