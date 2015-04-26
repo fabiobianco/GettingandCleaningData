@@ -3,9 +3,11 @@
 This is the CodeBook for the **runanalisys** tiny dataset creared with the *run_analysis.R* script
 
 # Information about the experimental study design that generated the raw data 
-The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+From the *readme.txt* file in **"UCI HAR Dataset"** we can read that:
 
-The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
+*The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.*
+
+*The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.*
 
 # Information about choice made on data manipolation
 The *run_analysis.R* script performs the following steps to clean the data:  
@@ -68,10 +70,17 @@ describes each variable and its units.
 * std             --> standard deviation
 * Mag             --> Signal Magnitude 
 
-Variables in dataset:
+**Variables in dataset:**
 
 1. *subject* - volunteers identifier, possible value from 1 to 30        
 2. *activityname* - type of activity: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
+
+From the *readme.txt* file in **"UCI HAR Dataset"** we can read that **"each variable is normalized and bounded within [-1,1]"**, for example for the *timeBodyAcc.mean.X* variable we can see this
+```
+> summary(runanalisys[,3])
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2216  0.2712  0.2770  0.2743  0.2800  0.3015  
+```
 3. timeBodyAcc.mean.X 
 4. timeBodyAcc.mean.Y 
 5. timeBodyAcc.mean.Z 
