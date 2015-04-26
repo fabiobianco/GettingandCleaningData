@@ -19,6 +19,7 @@ The *run_analysis.R* script performs the following steps to clean the data:
 HAR_dataset <- rbind(test_dataset, train_dataset)
 ```
 6. Extracts only the measurements on the mean and standard deviation for each measurement in the dataset  
+**We consider only variables in features file that contain the "mean" or "std" words in her name**
 ```
 mean_sd_features <- grep("(mean|std)", features[, 2],ignore.case=T)
 ```
@@ -26,7 +27,8 @@ mean_sd_features <- grep("(mean|std)", features[, 2],ignore.case=T)
 ```
 HAR_dataset1 <- merge(activity_labels,HAR_mean_sd_dataset)
 ```
-8. labels the data set with descriptive variable names
+8. labels the data set with descriptive variable names  
+change "-" with ".", "t" with "time", "f" with "frequency" and remove "()" from name variables
 ```
 #
 new_labels <- gsub("-", ".", names(HAR_dataset2))
@@ -57,23 +59,31 @@ write.table(HAR_dataset5 , "runanalisys.txt", sep="\t")
 # Information about the variables in the data set
 describes each variable and its units.
 
+**Legend:**
+
+* time            --> signal in time domain
+* frequency       --> signal in frequencity domani
+* acc             --> signal from accelerometer 
+* gyro            --> signal from gyroscope
+* std             --> standard deviation
+* Mag             --> Signal Magnitude 
+
+Variables in dataset:
+
 1. *subject* - volunteers identifier, possible value from 1 to 30        
 2. *activityname* - type of activity: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
-
-Group of time variable
-
-3. timeBodyAcc.mean.X
-4. timeBodyAcc.mean.Y
-5. timeBodyAcc.mean.Z
-6. timeBodyAcc.std.X
-7. timeBodyAcc.std.Y
-8. timeBodyAcc.std.Z
-9. timeGravityAcc.mean.X
-10. timeGravityAcc.mean.Y
-11. timeGravityAcc.mean.Z
-12. timeGravityAcc.std.X
-13. timeGravityAcc.std.Y
-14. timeGravityAcc.std.Z
+3. timeBodyAcc.mean.X 
+4. timeBodyAcc.mean.Y 
+5. timeBodyAcc.mean.Z 
+6. timeBodyAcc.std.X 
+7. timeBodyAcc.std.Y 
+8. timeBodyAcc.std.Z 
+9. timeGravityAcc.mean.X 
+10. timeGravityAcc.mean.Y 
+11. timeGravityAcc.mean.Z 
+12. timeGravityAcc.std.X 
+13. timeGravityAcc.std.Y 
+14. timeGravityAcc.std.Z 
 15. timeBodyAccJerk.mean.X
 16. timeBodyAccJerk.mean.Y
 17. timeBodyAccJerk.mean.Z
@@ -102,12 +112,9 @@ Group of time variable
 40. timeBodyGyroMag.std
 41. timeBodyGyroJerkMag.mean
 42. timeBodyGyroJerkMag.std
-
-Group of frequency variable
-
 43. frequencyBodyAcc.mean.X
 44. frequencyBodyAcc.mean.Y
-45. frequencyBodyAcc.mean.Z
+45. frequencyBodyAcc.mean.Z     
 46. frequencyBodyAcc.std.X
 47. frequencyBodyAcc.std.Y
 48. frequencyBodyAcc.std.Z
