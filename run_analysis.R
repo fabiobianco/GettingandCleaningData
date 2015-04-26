@@ -87,9 +87,12 @@ HAR_dataset2 <- HAR_dataset1
 # 4 - labels the data set with descriptive variable names #
 ###########################################################
 #
-# just made before when I cread the training and test data set!
-
+new_labels <- gsub("-", ".", names(HAR_dataset2))
+new_labels <- gsub("\\bt", "time", new_labels)
+new_labels <- gsub("\\bf", "frequency", new_labels)
+new_labels <- gsub("log\\(", "", new_labels)
 #
+names(HAR_dataset2) <- new_labels
 #######################################################################################################################
 # 5 - creates a second, independent tidy dataset with the average of each variable for each activity and each subject #
 #######################################################################################################################
